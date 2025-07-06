@@ -4,44 +4,277 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Charity Water Landing Page</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Remove default margin and padding from the whole page */
+        html, body {
+          margin: 0;    /* No space around the page */
+          padding: 0;   /* No space inside the page */
+        }
+
+        /* Main image section with margin around it */
+        .main-image {
+          width: 100%;                /* Section fills the whole page */
+          padding: 0;                 /* No space inside the section */
+          margin: 24px 10px;          /* Space above/below and on the sides */
+          background: #fff;           /* White background for the section */
+          border-radius: 12px;        /* 
+          box-shadow: 0 2px 8px rgba(46, 157, 247, 0.07); /* Soft shadow */
+          position: relative;         /* Needed for absolute positioning of text */
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          overflow: hidden; /* Ensures text doesn't spill out */
+        }
+
+        /* Make the image fill the section */
+        .feature-photo {
+          width: 100%;                /* Image fills the section */
+          height: auto;               /* Keep the image's aspect ratio */
+          display: block;             /* Remove small gaps below image */
+          border-radius: 12px;        /* Match the section's rounded corners */
+          box-shadow: 0 2px 8px rgba(46, 157, 247, 0.10); /* Soft shadow */
+        }
+
+        /* Header styles */
+        header {
+          background: #fff;              /* White background for the header */
+          padding: 12px 16px;            /* Space inside the header */
+          display: flex;                 /* Place logo and nav side by side */
+          justify-content: space-between;/* Space between logo and nav */
+          align-items: center;           /* Center items vertically */
+          border-radius: 12px;           /* Rounded corners for the header */
+          box-shadow: 0 2px 8px rgba(46, 157, 247, 0.07); /* Soft shadow */
+          margin: 24px 10px 16px 10px;   /* Space around the header */
+        }
+
+        /* Logo styles */
+        .logo {
+          font-weight: bold;
+          color: #222;                   /* Black text */
+          font-size: 1.3em;              /* Bigger logo text */
+          letter-spacing: 1px;
+          display: flex;
+          align-items: center;
+        }
+
+        /* Style for the logo image so it stays small and lines up with the text */
+        .logo-img {
+          height: 28px;                  /* Makes the logo image small */
+          vertical-align: middle;        /* Aligns the image with the text */
+          margin-right: 6px;             /* Adds space between the image and the text */
+        }
+
+        /* Navigation styles */
+        nav {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+
+        /* Navigation links */
+        nav a {
+          text-decoration: none;
+          color: #222;
+          font-size: 1.15em;             /* Bigger nav links */
+          padding: 6px 10px;
+          border-radius: 4px;
+        }
+
+        /* Give button styles */
+        .give-button {
+          background-color: #FFC907;     /* Yellow */
+          color: #222;
+          font-weight: bold;
+          padding: 8px 16px;
+          border-radius: 6px;
+          margin-left: 8px;
+          display: flex;
+          align-items: center;
+          border: none;
+        }
+
+        /* Blue water drop emoji */
+        .water-drop {
+          color: #2E9DF7;                /* Primary blue */
+          margin-left: 4px;
+        }
+
+        /* Text box over the image */
+        .hero-text {
+          position: absolute;           /* Place text over the image */
+          top: 96px;                    /* About 1 inch from the top */
+          right: 80px;                  /* Move closer to the right edge (more width to the right) */
+          text-align: center;           /* Center the text inside the box */
+          color: #fff;                  /* White text */
+          max-width: 600px;             /* Even wider box so headline fits on one line */
+          background: rgba(0,0,0,0.3);  /* Slight dark background for readability */
+          padding: 22px 24px 18px 24px; /* Padding inside the text box */
+          border-radius: 10px;          /* Rounded corners for the text box */
+          font-family: 'Proxima Nova', Arial, sans-serif; /* Use Proxima Nova font */
+        }
+
+        /* Make all text on the page bigger */
+        body {
+          font-size: 1.25em; /* Even larger base font size for the whole page */
+        }
+
+        /* Headline styles */
+        .hero-text h1 {
+          font-size: 2.3em;    /* Bigger headline */
+          margin: 0 0 18px 0;
+          font-weight: bold;
+        }
+
+        /* Subtext styles */
+        .hero-subtext {
+          font-size: 1.25em; /* Bigger subtext */
+          margin: 0;
+          opacity: 0.9;
+        }
+
+        /* Small white box under the hero text */
+        .hero-box {
+          background: #fff;             /* White background */
+          color: #222;                  /* Black text for contrast */
+          border-radius: 8px;           /* Rounded corners */
+          padding: 10px 24px;           /* Space inside the box */
+          margin: 22px auto 0 auto;     /* Space above, centered horizontally */
+          display: flex;                /* Arrange children in a row */
+          align-items: center;          /* Center items vertically */
+          justify-content: space-between; /* Space between left and right */
+          font-size: 1em;               /* Normal font size */
+          font-weight: bold;            /* Make text bold */
+          box-shadow: 0 2px 8px rgba(46, 157, 247, 0.10); /* Soft shadow */
+          max-width: 420px;             /* Wider box */
+          width: 100%;
+        }
+
+        /* Left side text in gray */
+        .hero-box-left {
+          color: #888;                  /* Gray color */
+          font-weight: normal;          /* Normal weight for less emphasis */
+        }
+
+        /* Yellow subscribe button */
+        .hero-box-btn {
+          background: #FFC907;          /* Yellow background */
+          color: #fff;                  /* White text */
+          border: none;                 /* No border */
+          border-radius: 6px;           /* Rounded corners */
+          padding: 8px 20px;            /* Space inside the button */
+          font-size: 1em;               /* Button text size */
+          font-weight: bold;            /* Bold text */
+          cursor: pointer;              /* Pointer cursor on hover */
+          margin-left: 16px;            /* Space between text and button */
+          transition: background 0.2s;
+        }
+
+        /* Button hover effect */
+        .hero-box-btn:hover {
+          background: #e6b800;          /* Slightly darker yellow on hover */
+        }
+
+        /* Responsive styles for small screens */
+        @media (max-width: 600px) {
+          /* Make header stack vertically */
+          header {
+            flex-direction: column;      /* Stack logo and nav */
+            align-items: flex-start;     /* Align items to the left */
+            padding: 10px 8px;           /* Less padding */
+            margin: 16px 4px 8px 4px;    /* Less margin */
+          }
+
+          nav {
+            flex-wrap: wrap;             /* Allow nav links to wrap */
+            gap: 8px;
+            margin-top: 8px;
+          }
+
+          /* Make logo text smaller */
+          .logo {
+            font-size: 1em;
+          }
+
+          /* Main image section: less margin */
+          .main-image {
+            margin: 12px 2px;
+            border-radius: 8px;
+          }
+
+          /* Make the text box over the image smaller and move it down */
+          .hero-text {
+            top: 24px;
+            right: 8px;
+            left: 8px;
+            max-width: 95vw;             /* Use most of the screen width */
+            padding: 12px 8px 10px 8px;
+            font-size: 1em;
+          }
+
+          .hero-text h1 {
+            font-size: 1.2em;
+          }
+
+          .hero-subtext {
+            font-size: 1em;
+          }
+
+          /* Make the white box under the text fit smaller screens */
+          .hero-box {
+            flex-direction: column;      /* Stack text and button */
+            align-items: stretch;
+            max-width: 98vw;
+            padding: 8px 4px;
+            font-size: 0.95em;
+          }
+
+          .hero-box-btn {
+            margin-left: 0;
+            margin-top: 8px;
+            width: 100%;
+            padding: 10px 0;
+            font-size: 1em;
+          }
+        }
+    </style>
 </head>
 <body>
-    <!-- Hero Section: This is the main banner at the top of the page -->
-    <section class="hero">
-        <!-- Main headline -->
-        <h1>Clean Water for Everyone</h1>
-        <!-- Subheadline -->
-        <p>Join us in bringing safe, clean water to communities in need.</p>
-    </section>
 
-    <!-- Story Section: This tells the story of the nonprofit -->
-    <section class="story">
-        <h2>Our Story</h2>
-        <p>
-         
-    </section>
+    <!-- Header Section -->
+    <header>
+      <!-- Logo image and charity: water text -->
+      <span class="logo">
+        <!-- Small jerry can image as the logo -->
+        <img src="img/water-can-transparent.png" alt="charity: water logo" class="logo-img">
+        charity: water
+      </span>
+      <!-- Navigation links -->
+      <nav>
+        <a href="#">Take Action</a>
+        <a href="#">About Us</a>
+        <a href="#">Why Water?</a>
+        <a href="#">Sign In</a>
+        <!-- Yellow Give button with a blue water drop emoji -->
+        <a href="#" class="give-button">Give <span class="water-drop">💧</span></a>
+      </nav>
+    </header>
 
-    <!-- Real-World Impact Story Section -->
-    <section class="impact-story">
-        <!-- Section headline -->
-        <h2>Real Impact: Meet Amina</h2>
-        <!-- Container for image and text -->
-        <div class="impact-content">
-            <!-- Impact image -->
-            <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80" alt="Amina smiling with clean water" class="impact-image">
-            <!-- Impact story text -->
-            <p>
-                Amina used to walk miles every day to collect water for her family. Thanks to your support, her village now has a clean water well. Amina can go to school and her family is healthier and happier.
-            </p>
+    <!-- Main Image Section: This showcases a large, impactful image -->
+    <section class="main-image">
+      <!-- The alt text describes the image for accessibility -->
+      <img src="img/C.png" alt="Girl smiling" class="feature-photo">
+      <!-- Text box over the image -->
+      <div class="hero-text">
+        <h1>One Donation.<br>Generations of Impact.</h1>
+        <p class="hero-subtext">
+          You're not just donating – you're fighting for equality, education, and a future where everyone has access to life's most basic need.
+        </p>
+        <!-- Small white box under the text -->
+        <div class="hero-box">
+          <span class="hero-box-left">Join the movement</span>
+          <button class="hero-box-btn">Subscribe</button>
         </div>
-    </section>
-
-    <!-- Call-to-Action Section: This encourages visitors to take action -->
-    <section class="call-to-action">
-        <h2>Make a Difference</h2>
-        <p>Your support can help save lives. Every donation brings us closer to a world with clean water for all.</p>
-        <a href="#" class="donate-button">Donate Now</a>
+      </div>
     </section>
 </body>
 </html>
